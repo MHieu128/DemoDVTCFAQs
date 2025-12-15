@@ -1,17 +1,25 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Menu, X, GraduationCap, Users, Award, BookOpen, Phone, Mail, MapPin, Facebook, Youtube, Globe, Play, Quote, Calendar, Clock, ChevronRight, Hotel, Utensils, Plane, Languages, Camera, Users2, MessageCircle, Send, MapPin2, Building2, Star, MessageSquare } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import ReactMarkdown from 'react-markdown'
+import { Menu, X, GraduationCap, Users, Award, BookOpen, Phone, Mail, MapPin, Facebook, Youtube, Globe, Play, Quote, Calendar, Clock, ChevronRight, ChevronLeft, Hotel, Utensils, Plane, Languages, Camera, Users2, MessageCircle, Send, Building2, Star, MessageSquare } from 'lucide-react'
+
+interface ChatMessage {
+  id: number
+  text: string
+  sender: 'user' | 'bot'
+  timestamp: string
+}
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [isChatOpen, setIsChatOpen] = useState(false)
-  const [chatMessages, setChatMessages] = useState([])
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
   const [currentMessage, setCurrentMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [sessionId, setSessionId] = useState('')
@@ -23,32 +31,32 @@ export default function Home() {
   // Slider data from original website
   const slides = [
     {
-      image: 'https://dvtc.edu.vn/uploads/05-2025/ts2025.jpg',
+      image: '/images/slides/ts2025.jpg',
       title: 'Tuyển sinh 2025',
       link: 'https://dvtc.edu.vn/thong-bao-tuyen-sinh-nam-2025.html'
     },
     {
-      image: 'https://dvtc.edu.vn/uploads/01-2025/nganh-huong-dan-du-lich.png',
+      image: '/images/slides/nganh-huong-dan-du-lich.png',
       title: 'Ngành Hướng dẫn du lịch',
       link: '#'
     },
     {
-      image: 'https://dvtc.edu.vn/uploads/01-2025/nganh-ky-thuat-che-bien-mon-an.png',
+      image: '/images/slides/nganh-ky-thuat-che-bien-mon-an.png',
       title: 'Ngành Kỹ thuật chế biến món ăn',
       link: '#'
     },
     {
-      image: 'https://dvtc.edu.vn/uploads/01-2025/nganh-phien-dich-tieng-anh-du-lich.png',
+      image: '/images/slides/nganh-phien-dich-tieng-anh-du-lich.png',
       title: 'Ngành Phiên dịch tiếng Anh du lịch',
       link: '#'
     },
     {
-      image: 'https://dvtc.edu.vn/uploads/01-2025/nganh-quan-tri-du-lich-mice-to-chuc-su-kien.png',
+      image: '/images/slides/nganh-quan-tri-du-lich-mice-to-chuc-su-kien.png',
       title: 'Ngành Quản trị Du lịch MICE',
       link: '#'
     },
     {
-      image: 'https://dvtc.edu.vn/uploads/01-2025/nganh-quan-tri-khach-san.png',
+      image: '/images/slides/nganh-quan-tri-khach-san.png',
       title: 'Ngành Quản trị khách sạn',
       link: '#'
     }
@@ -212,7 +220,7 @@ export default function Home() {
   const sendMessage = async () => {
     if (!currentMessage.trim()) return
 
-    const userMessage = {
+    const userMessage: ChatMessage = {
       id: Date.now(),
       text: currentMessage,
       sender: 'user',
@@ -237,7 +245,7 @@ export default function Home() {
 
       const data = await response.json()
       
-      const botMessage = {
+      const botMessage: ChatMessage = {
         id: Date.now() + 1,
         text: data.success ? data.response : 'Xin lỗi, tôi không thể trả lời câu hỏi này lúc này.',
         sender: 'bot',
@@ -246,7 +254,7 @@ export default function Home() {
 
       setChatMessages(prev => [...prev, botMessage])
     } catch (error) {
-      const errorMessage = {
+      const errorMessage: ChatMessage = {
         id: Date.now() + 1,
         text: 'Xin lỗi, có lỗi xảy ra khi kết nối với chatbot. Vui lòng thử lại sau.',
         sender: 'bot',
@@ -258,7 +266,7 @@ export default function Home() {
     }
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       sendMessage()
@@ -266,9 +274,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-dvh bg-background text-foreground">
       {/* Top Bar */}
-      <div className="bg-gray-900 text-white py-2">
+      <div className="bg-primary text-primary-foreground py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center text-sm">
             <div className="flex items-center space-x-4">
@@ -277,13 +285,13 @@ export default function Home() {
               <span>Trường cao đẳng du lịch Đà Nẵng</span>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="https://www.facebook.com/www.dvtc.edu.vn" className="hover:text-blue-400">
+              <a href="https://www.facebook.com/www.dvtc.edu.vn" className="hover:text-primary-foreground/80">
                 <Facebook size={16} />
               </a>
-              <a href="https://www.youtube.com/channel/UCiqM6sFhr3QO-Ds356BCPfA" className="hover:text-red-400">
+              <a href="https://www.youtube.com/channel/UCiqM6sFhr3QO-Ds356BCPfA" className="hover:text-primary-foreground/80">
                 <Youtube size={16} />
               </a>
-              <a href="https://zalo.me/302741776451923122" className="hover:text-blue-400">
+              <a href="https://zalo.me/302741776451923122" className="hover:text-primary-foreground/80">
                 <MessageSquare size={16} />
               </a>
             </div>
@@ -292,9 +300,10 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          {/* Logo and Title Row */}
+          <div className="flex justify-between items-center py-4 border-b border-border">
             <div className="flex items-center">
               <img 
                 src="https://dvtc.edu.vn/uploads/07-2024/logo-1760.png" 
@@ -302,48 +311,54 @@ export default function Home() {
                 className="h-16 w-auto mr-4"
               />
               <div>
-                <h1 className="text-xl font-bold text-gray-900">TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG</h1>
-                <p className="text-sm text-gray-600">Danang Vocational Tourism College</p>
+                <h1 className="text-xl font-bold tracking-tight text-foreground">TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG</h1>
+                <p className="text-sm text-muted-foreground">Danang Vocational Tourism College</p>
               </div>
             </div>
             
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-6">
-              <a href="#" className="text-gray-900 hover:text-blue-600 font-medium">Trang chủ</a>
-              <div className="relative group">
-                <button className="text-gray-700 hover:text-blue-600 font-medium flex items-center">
-                  Giới thiệu <ChevronRight className="w-4 h-4 ml-1 rotate-90" />
-                </button>
-                <div className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Thư ngỏ của Hiệu trưởng</a>
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Giới thiệu chung</a>
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Tầm nhìn và sứ mệnh</a>
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Cơ sở vật chất</a>
-                </div>
-              </div>
-              <div className="relative group">
-                <button className="text-gray-700 hover:text-blue-600 font-medium flex items-center">
-                  Tuyển sinh <ChevronRight className="w-4 h-4 ml-1 rotate-90" />
-                </button>
-                <div className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Tuyển sinh Cao đẳng</a>
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Tuyển sinh Trung cấp</a>
-                  <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Liên kết quốc tế</a>
-                </div>
-              </div>
-              <a href="#programs" className="text-gray-700 hover:text-blue-600 font-medium">Ngành đào tạo</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Hợp tác quốc tế</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 font-medium">Liên hệ</a>
-              <Button className="bg-blue-600 hover:bg-blue-700">Đăng ký tư vấn</Button>
-            </nav>
-
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+              className="lg:hidden rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
+
+            {/* Desktop CTA Button */}
+            <div className="hidden lg:block">
+              <Button>Đăng ký tư vấn</Button>
+            </div>
+          </div>
+          
+          {/* Navigation Row - Separate line */}
+          <div className="hidden lg:block">
+            <nav className="flex items-center justify-center space-x-8 py-4">
+              <a href="#" className="text-foreground hover:text-primary font-medium transition-colors">Trang chủ</a>
+              <div className="relative group">
+                <button className="text-muted-foreground hover:text-primary font-medium flex items-center transition-colors">
+                  Giới thiệu <ChevronRight className="w-4 h-4 ml-1 rotate-90" />
+                </button>
+                <div className="absolute top-full left-0 mt-1 w-56 rounded-lg border border-border bg-popover text-popover-foreground shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground first:rounded-t-lg">Thư ngỏ của Hiệu trưởng</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">Giới thiệu chung</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">Tầm nhìn và sứ mệnh</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground last:rounded-b-lg">Cơ sở vật chất</a>
+                </div>
+              </div>
+              <div className="relative group">
+                <button className="text-muted-foreground hover:text-primary font-medium flex items-center transition-colors">
+                  Tuyển sinh <ChevronRight className="w-4 h-4 ml-1 rotate-90" />
+                </button>
+                <div className="absolute top-full left-0 mt-1 w-56 rounded-lg border border-border bg-popover text-popover-foreground shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground first:rounded-t-lg">Tuyển sinh Cao đẳng</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">Tuyển sinh Trung cấp</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground last:rounded-b-lg">Liên kết quốc tế</a>
+                </div>
+              </div>
+              <a href="#programs" className="text-muted-foreground hover:text-primary font-medium transition-colors">Ngành đào tạo</a>
+              <a href="#" className="text-muted-foreground hover:text-primary font-medium transition-colors">Hợp tác quốc tế</a>
+              <a href="#" className="text-muted-foreground hover:text-primary font-medium transition-colors">Liên hệ</a>
+            </nav>
           </div>
         </div>
 
@@ -351,20 +366,22 @@ export default function Home() {
         {isMenuOpen && (
           <div className="lg:hidden border-t">
             <nav className="px-4 py-2 space-y-1">
-              <a href="#" className="block px-3 py-2 text-gray-900 font-medium">Trang chủ</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Giới thiệu</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Tuyển sinh</a>
-              <a href="#programs" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Ngành đào tạo</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Hợp tác quốc tế</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Liên hệ</a>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">Đăng ký tư vấn</Button>
+              <a href="#" className="block rounded-md px-3 py-2 font-medium text-foreground hover:bg-accent hover:text-accent-foreground">Trang chủ</a>
+              <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Giới thiệu</a>
+              <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Tuyển sinh</a>
+              <a href="#programs" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Ngành đào tạo</a>
+              <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Hợp tác quốc tế</a>
+              <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Liên hệ</a>
+              <div className="pt-2">
+                <Button className="w-full">Đăng ký tư vấn</Button>
+              </div>
             </nav>
           </div>
         )}
       </header>
 
       {/* Hero Slider */}
-      <section className="relative h-[500px] overflow-hidden">
+      <section className="relative h-125 overflow-hidden group bg-muted">
         <div className="relative h-full">
           {slides.map((slide, index) => (
             <div
@@ -373,17 +390,20 @@ export default function Home() {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <Image
+              <img
                 src={slide.image}
                 alt={slide.title}
-                fill
-                className="object-cover"
-                priority={index === 0}
+                className="w-full h-full object-cover"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  console.error('Image failed to load:', slide.image);
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <div className="absolute inset-0 bg-linear-to-b from-foreground/70 via-foreground/50 to-foreground/80 flex items-center justify-center">
+                <div className="text-center text-primary-foreground px-4 max-w-4xl">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg">{slide.title}</h2>
+                  <Button size="lg" className="h-12 px-8 text-base md:text-lg">
                     Tìm hiểu ngay
                   </Button>
                 </div>
@@ -392,6 +412,22 @@ export default function Home() {
           ))}
         </div>
         
+        {/* Navigation arrows */}
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-border bg-background/80 p-2 text-foreground opacity-0 backdrop-blur transition-opacity hover:bg-background group-hover:opacity-100"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-border bg-background/80 p-2 text-foreground opacity-0 backdrop-blur transition-opacity hover:bg-background group-hover:opacity-100"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+        
         {/* Slider indicators */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {slides.map((_, index) => (
@@ -399,21 +435,31 @@ export default function Home() {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
+                index === currentSlide ? 'bg-background' : 'bg-background/50'
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </section>
 
       {/* Student Testimonials & Video Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Trải nghiệm thực tế</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Khám phá môi trường học tập và cảm nhận từ sinh viên của chúng tôi
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Video Section */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Video giới thiệu</h3>
-              <div className="relative rounded-lg overflow-hidden shadow-lg">
+              <h3 className="text-xl font-bold text-foreground mb-4 flex items-center">
+                <Play className="w-5 h-5 mr-2 text-primary" />
+                Video giới thiệu
+              </h3>
+              <div className="relative overflow-hidden rounded-xl border border-border bg-card shadow-sm">
                 <video
                   className="w-full h-auto"
                   controls
@@ -430,10 +476,12 @@ export default function Home() {
 
             {/* Testimonials Section */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Cảm nhận sinh viên</h3>
+              <h3 className="text-xl font-bold text-foreground mb-4 flex items-center">
+                <Quote className="w-5 h-5 mr-2 text-primary" />
+                Cảm nhận sinh viên
+              </h3>
               <div className="relative">
-                <Quote className="absolute -top-4 -left-4 w-12 h-12 text-blue-200" />
-                <div className="bg-white rounded-lg shadow-lg p-8">
+                <div className="rounded-xl border border-border bg-card text-card-foreground p-8 shadow-sm">
                   {testimonials.map((testimonial, index) => (
                     <div
                       key={index}
@@ -441,7 +489,7 @@ export default function Home() {
                         index === currentTestimonial ? 'opacity-100' : 'opacity-0 absolute inset-0'
                       }`}
                     >
-                      <p className="text-gray-700 mb-6 italic">"{testimonial.content}"</p>
+                      <p className="text-muted-foreground mb-6 italic">"{testimonial.content}"</p>
                       <div className="flex items-center">
                         <img
                           src={testimonial.avatar}
@@ -449,9 +497,9 @@ export default function Home() {
                           className="w-12 h-12 rounded-full mr-4"
                         />
                         <div>
-                          <h4 className="font-semibold text-gray-900">{testimonial.author}</h4>
-                          <p className="text-sm text-gray-600">{testimonial.class}</p>
-                          <p className="text-sm text-blue-600">{testimonial.department}</p>
+                          <h4 className="font-semibold text-foreground">{testimonial.author}</h4>
+                          <p className="text-sm text-muted-foreground">{testimonial.class}</p>
+                          <p className="text-sm text-primary">{testimonial.department}</p>
                         </div>
                       </div>
                     </div>
@@ -465,7 +513,7 @@ export default function Home() {
                       key={index}
                       onClick={() => setCurrentTestimonial(index)}
                       className={`w-2 h-2 rounded-full transition-colors ${
-                        index === currentTestimonial ? 'bg-blue-600' : 'bg-gray-300'
+                        index === currentTestimonial ? 'bg-primary' : 'bg-border'
                       }`}
                     />
                   ))}
@@ -477,11 +525,15 @@ export default function Home() {
       </section>
 
       {/* Training Programs Section */}
-      <section id="programs" className="py-16">
+      <section id="programs" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ngành nghề đào tạo</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-4 text-sm font-semibold text-secondary-foreground bg-secondary rounded-full">
+              <GraduationCap className="w-4 h-4 mr-2" />
+              Đào tạo chất lượng cao
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Ngành nghề đào tạo</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Các ngành đào tạo đa dạng, đáp ứng nhu cầu phát triển của ngành du lịch và dịch vụ
             </p>
           </div>
@@ -495,8 +547,8 @@ export default function Home() {
                     alt={program.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white">
+                  <div className="absolute inset-0 bg-linear-to-t from-foreground/70 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-primary-foreground">
                     <div className="flex items-center mb-2">
                       {program.icon}
                     </div>
@@ -504,7 +556,7 @@ export default function Home() {
                   </div>
                 </div>
                 <CardContent className="p-4">
-                  <Button variant="outline" className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     Tìm hiểu thêm
                   </Button>
                 </CardContent>
@@ -515,14 +567,20 @@ export default function Home() {
       </section>
 
       {/* News Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Tin tức & Thông báo</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Cập nhật thông tin mới nhất từ nhà trường
+            </p>
+          </div>
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Tin tức sự kiện */}
-            <Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Calendar className="w-5 h-5 mr-2 text-blue-600" />
+                <CardTitle className="flex items-center text-primary">
+                  <Calendar className="w-5 h-5 mr-2" />
                   Tin tức sự kiện
                 </CardTitle>
               </CardHeader>
@@ -537,9 +595,10 @@ export default function Home() {
                           className="w-full h-32 object-cover rounded mb-2"
                         />
                       )}
-                      <h4 className="font-semibold text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
-                      <a href={news.link} className="text-blue-600 hover:text-blue-800 text-sm">
-                        Đọc thêm →
+                      <h4 className="font-semibold text-foreground mb-2 line-clamp-2">{news.title}</h4>
+                      <a href={news.link} className="inline-flex items-center text-primary hover:underline text-sm font-semibold">
+                        Đọc thêm
+                        <ChevronRight className="w-4 h-4 ml-1" />
                       </a>
                     </div>
                   ))}
@@ -551,10 +610,10 @@ export default function Home() {
             </Card>
 
             {/* Hợp tác doanh nghiệp */}
-            <Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Building2 className="w-5 h-5 mr-2 text-green-600" />
+                <CardTitle className="flex items-center text-primary">
+                  <Building2 className="w-5 h-5 mr-2" />
                   Hợp tác doanh nghiệp
                 </CardTitle>
               </CardHeader>
@@ -569,9 +628,10 @@ export default function Home() {
                           className="w-full h-32 object-cover rounded mb-2"
                         />
                       )}
-                      <h4 className="font-semibold text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
-                      <a href={news.link} className="text-green-600 hover:text-green-800 text-sm">
-                        Đọc thêm →
+                      <h4 className="font-semibold text-foreground mb-2 line-clamp-2">{news.title}</h4>
+                      <a href={news.link} className="inline-flex items-center text-primary hover:underline text-sm font-semibold">
+                        Đọc thêm
+                        <ChevronRight className="w-4 h-4 ml-1" />
                       </a>
                     </div>
                   ))}
@@ -583,10 +643,10 @@ export default function Home() {
             </Card>
 
             {/* Thông báo chung */}
-            <Card>
+            <Card className="hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Clock className="w-5 h-5 mr-2 text-red-600" />
+                <CardTitle className="flex items-center text-primary">
+                  <Clock className="w-5 h-5 mr-2" />
                   Thông báo chung
                 </CardTitle>
               </CardHeader>
@@ -601,9 +661,10 @@ export default function Home() {
                           className="w-full h-32 object-cover rounded mb-2"
                         />
                       )}
-                      <h4 className="font-semibold text-gray-900 mb-2 line-clamp-2">{news.title}</h4>
-                      <a href={news.link} className="text-red-600 hover:text-red-800 text-sm">
-                        Đọc thêm →
+                      <h4 className="font-semibold text-foreground mb-2 line-clamp-2">{news.title}</h4>
+                      <a href={news.link} className="inline-flex items-center text-primary hover:underline text-sm font-semibold">
+                        Đọc thêm
+                        <ChevronRight className="w-4 h-4 ml-1" />
                       </a>
                     </div>
                   ))}
@@ -618,22 +679,26 @@ export default function Home() {
       </section>
 
       {/* Partners Section */}
-      <section className="py-16">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Đối tác</h2>
-            <p className="text-xl text-gray-600">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-4 text-sm font-semibold text-secondary-foreground bg-secondary rounded-full">
+              <Users className="w-4 h-4 mr-2" />
+              Đối tác chiến lược
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Đối tác</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Các doanh nghiệp uy tín hợp tác với trường
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
             {partners.map((partner, index) => (
-              <div key={index} className="flex items-center justify-center">
+              <div key={index} className="flex items-center justify-center rounded-lg border border-border bg-card p-4 transition-all duration-300 group hover:bg-accent hover:shadow-sm">
                 <img
                   src={partner}
                   alt={`Partner ${index + 1}`}
-                  className="h-16 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  className="h-12 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
                 />
               </div>
             ))}
@@ -642,34 +707,61 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center justify-center rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2 mb-6 text-sm font-semibold">
+            <Star className="w-4 h-4 mr-2" />
+            Cơ hội nghề nghiệp tương lai
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             Sẵn sàng bắt đầu sự nghiệp du lịch?
           </h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Hãy cùng Trường Cao Đẳng Du Lịch Đà Nẵng xây dựng tương lai của bạn
+
+          <p className="text-lg md:text-xl mb-10 text-primary-foreground/80 max-w-3xl mx-auto leading-relaxed">
+            Hãy cùng Trường Cao Đẳng Du Lịch Đà Nẵng xây dựng tương lai của bạn với đào tạo chất lượng cao và cơ hội việc làm hấp dẫn.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button size="lg" className="bg-background text-foreground hover:bg-background/90">
               Đăng ký tuyển sinh
+              <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+            <Button
+              size="lg"
+              variant="ghost"
+              className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+            >
               Tìm hiểu thêm
             </Button>
+          </div>
+
+          <div className="mt-14 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold mb-2">20+</div>
+              <div className="text-sm text-primary-foreground/80">Năm kinh nghiệm</div>
+            </div>
+            <div className="text-center border-x border-primary-foreground/20">
+              <div className="text-3xl md:text-4xl font-bold mb-2">5000+</div>
+              <div className="text-sm text-primary-foreground/80">Sinh viên</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold mb-2">95%</div>
+              <div className="text-sm text-primary-foreground/80">Có việc làm</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-primary text-primary-foreground py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <h3 className="text-xl font-bold mb-4">Trường Cao Đẳng Du Lịch Đà Nẵng</h3>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2 text-primary-foreground/80">
                 <li className="flex items-start">
-                  <MapPin className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 mr-2 mt-1 shrink-0" />
                   <span>Nam Kỳ Khởi Nghĩa, Tổ 43, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng</span>
                 </li>
                 <li className="flex items-center">
@@ -682,13 +774,13 @@ export default function Home() {
                 </li>
               </ul>
               <div className="flex space-x-4 mt-6">
-                <a href="https://www.facebook.com/www.dvtc.edu.vn" className="text-gray-400 hover:text-white">
+                <a href="https://www.facebook.com/www.dvtc.edu.vn" className="text-primary-foreground/70 hover:text-primary-foreground">
                   <Facebook size={20} />
                 </a>
-                <a href="https://www.youtube.com/channel/UCiqM6sFhr3QO-Ds356BCPfA" className="text-gray-400 hover:text-white">
+                <a href="https://www.youtube.com/channel/UCiqM6sFhr3QO-Ds356BCPfA" className="text-primary-foreground/70 hover:text-primary-foreground">
                   <Youtube size={20} />
                 </a>
-                <a href="https://zalo.me/302741776451923122" className="text-gray-400 hover:text-white">
+                <a href="https://zalo.me/302741776451923122" className="text-primary-foreground/70 hover:text-primary-foreground">
                   <MessageSquare size={20} />
                 </a>
               </div>
@@ -696,28 +788,28 @@ export default function Home() {
             
             <div>
               <h4 className="font-semibold mb-4">Liên kết nhanh</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Giới thiệu</a></li>
-                <li><a href="#" className="hover:text-white">Tuyển sinh</a></li>
-                <li><a href="#" className="hover:text-white">Ngành đào tạo</a></li>
-                <li><a href="#" className="hover:text-white">Hợp tác quốc tế</a></li>
-                <li><a href="#" className="hover:text-white">Liên hệ</a></li>
+              <ul className="space-y-2 text-primary-foreground/70">
+                <li><a href="#" className="hover:text-primary-foreground">Giới thiệu</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Tuyển sinh</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Ngành đào tạo</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Hợp tác quốc tế</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Liên hệ</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Hỗ trợ sinh viên</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white">Thời khóa biểu</a></li>
-                <li><a href="#" className="hover:text-white">Lịch thi</a></li>
-                <li><a href="#" className="hover:text-white">Biểu mẫu chung</a></li>
-                <li><a href="#" className="hover:text-white">Tra cứu văn bằng</a></li>
-                <li><a href="#" className="hover:text-white">Thư viện</a></li>
+              <ul className="space-y-2 text-primary-foreground/70">
+                <li><a href="#" className="hover:text-primary-foreground">Thời khóa biểu</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Lịch thi</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Biểu mẫu chung</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Tra cứu văn bằng</a></li>
+                <li><a href="#" className="hover:text-primary-foreground">Thư viện</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-primary-foreground/70">
             <p>&copy; 2024 Trường Cao Đẳng Du Lịch Đà Nẵng. Bản quyền thuộc về Trường Cao Đẳng Du Lịch Đà Nẵng</p>
           </div>
         </div>
@@ -731,7 +823,8 @@ export default function Home() {
         {!isChatOpen && (
           <Button
             onClick={() => setIsChatOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 rounded-full w-14 h-14 p-0 shadow-lg flex items-center justify-center"
+            size="icon"
+            className="size-14 rounded-full shadow-lg"
           >
             <MessageSquare size={24} />
           </Button>
@@ -739,21 +832,21 @@ export default function Home() {
 
         {/* Chat Window */}
         {isChatOpen && (
-          <div className="bg-white rounded-lg shadow-2xl w-80 h-96 flex flex-col border border-gray-200">
+          <div className="bg-background rounded-lg shadow-xl w-104 sm:w-md h-140 flex flex-col border border-border">
             {/* Chat Header */}
-            <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+            <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex justify-between items-center">
               <div className="flex items-center">
                 <MessageCircle size={20} className="mr-2" />
                 <div>
                   <h3 className="font-semibold">Chatbot DVTC</h3>
-                  <p className="text-xs text-blue-100">Hỗ trợ trực tuyến 24/7</p>
+                  <p className="text-xs text-primary-foreground/80">Hỗ trợ trực tuyến 24/7</p>
                 </div>
               </div>
               <Button
                 onClick={() => setIsChatOpen(false)}
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-blue-700 p-1 h-auto"
+                className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground p-1 h-auto"
               >
                 <X size={20} />
               </Button>
@@ -762,8 +855,8 @@ export default function Home() {
             {/* Chat Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {chatMessages.length === 0 && (
-                <div className="text-center text-gray-500 py-8">
-                  <MessageCircle size={48} className="mx-auto mb-4 text-gray-300" />
+                <div className="text-center text-muted-foreground py-8">
+                  <MessageCircle size={48} className="mx-auto mb-4 text-muted-foreground/40" />
                   <p>Xin chào! Tôi là chatbot của Trường Cao Đẳng Du Lịch Đà Nẵng.</p>
                   <p className="text-sm mt-2">Tôi có thể giúp gì cho bạn?</p>
                 </div>
@@ -777,13 +870,65 @@ export default function Home() {
                   <div
                     className={`max-w-[70%] p-3 rounded-lg ${
                       message.sender === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-none'
-                        : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                        ? 'bg-primary text-primary-foreground rounded-br-none'
+                        : 'bg-muted text-foreground rounded-bl-none'
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
+                    <div className="text-sm leading-relaxed">
+                      <ReactMarkdown
+                        components={{
+                          a: ({ children, ...props }) => (
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="underline underline-offset-4 hover:opacity-80"
+                            >
+                              {children}
+                            </a>
+                          ),
+                          code: ({ children, className, ...props }) => {
+                            const isBlock = typeof className === 'string' && className.includes('language-')
+                            if (isBlock) {
+                              return (
+                                <code
+                                  {...props}
+                                  className="block whitespace-pre overflow-x-auto rounded-md bg-background/60 p-3 text-xs"
+                                >
+                                  {children}
+                                </code>
+                              )
+                            }
+
+                            return (
+                              <code
+                                {...props}
+                                className="rounded bg-background/60 px-1 py-0.5 text-[0.8125rem]"
+                              >
+                                {children}
+                              </code>
+                            )
+                          },
+                          pre: ({ children }) => (
+                            <pre className="my-2 overflow-x-auto rounded-md bg-background/60 p-3 text-xs">
+                              {children}
+                            </pre>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="my-2 list-disc pl-5">{children}</ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="my-2 list-decimal pl-5">{children}</ol>
+                          ),
+                          li: ({ children }) => <li className="my-1">{children}</li>,
+                          p: ({ children }) => <p className="my-1">{children}</p>,
+                        }}
+                      >
+                        {message.text}
+                      </ReactMarkdown>
+                    </div>
                     <p className={`text-xs mt-1 ${
-                      message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
+                      message.sender === 'user' ? 'text-primary-foreground/70' : 'text-muted-foreground'
                     }`}>
                       {message.timestamp}
                     </p>
@@ -793,11 +938,11 @@ export default function Home() {
               
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 text-gray-800 rounded-lg rounded-bl-none p-3">
+                  <div className="bg-muted text-foreground rounded-lg rounded-bl-none p-3">
                     <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                      <div className="w-2 h-2 bg-muted-foreground/60 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -805,21 +950,19 @@ export default function Home() {
             </div>
 
             {/* Chat Input */}
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-border">
               <div className="flex space-x-2">
-                <input
-                  type="text"
+                <Input
                   value={currentMessage}
                   onChange={(e) => setCurrentMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={handleKeyDown}
                   placeholder="Nhập tin nhắn..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   disabled={isLoading}
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={isLoading || !currentMessage.trim()}
-                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2"
+                  size="icon"
                 >
                   <Send size={16} />
                 </Button>
