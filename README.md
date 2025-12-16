@@ -22,10 +22,6 @@ This scaffold provides a robust foundation built with:
 - **🔄 TanStack Query** - Powerful data synchronization for React
 - **🌐 Fetch** - Promise-based HTTP request
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
-
 ### 🎨 Advanced UI Features
 - **📊 TanStack Table** - Headless UI for building tables and datagrids
 - **🖱️ DND Kit** - Modern drag and drop toolkit for React
@@ -54,16 +50,16 @@ This scaffold provides a robust foundation built with:
 
 ```bash
 # Install dependencies
-bun install
+yarn
 
 # Start development server
-bun run dev
+yarn next dev
 
 # Build for production
-bun run build
+yarn next build
 
 # Start production server
-bun start
+yarn next start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see your application running.
