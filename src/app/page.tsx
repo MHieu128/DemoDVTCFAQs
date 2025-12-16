@@ -303,23 +303,27 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Logo and Title Row */}
-          <div className="flex justify-between items-center py-4 border-b border-border">
-            <div className="flex items-center">
+          <div className="relative flex items-center justify-center py-3 sm:py-4 border-b border-border">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 min-w-0 mx-auto">
               <img 
                 src="https://dvtc.edu.vn/uploads/07-2024/logo-1760.png" 
                 alt="Trường Cao Đẳng Du Lịch Đà Nẵng" 
-                className="h-16 w-auto mr-4"
+                className="h-14 sm:h-16 lg:h-20 w-auto shrink-0"
               />
-              <div>
-                <h1 className="text-xl font-bold tracking-tight text-foreground">TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG</h1>
-                <p className="text-sm text-muted-foreground">Danang Vocational Tourism College</p>
+              <div className="min-w-0 flex flex-col justify-center">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight leading-none sm:leading-tight text-foreground">
+                  TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG
+                </h1>
+                <p className="mt-0.5 text-xs sm:text-sm lg:text-base font-medium leading-snug text-muted-foreground">
+                  Danang Vocational Tourism College
+                </p>
               </div>
             </div>
             
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
