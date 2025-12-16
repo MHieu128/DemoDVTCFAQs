@@ -323,11 +323,6 @@ export default function Home() {
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-
-            {/* Desktop CTA Button */}
-            <div className="hidden lg:block">
-              <Button>Đăng ký tư vấn</Button>
-            </div>
           </div>
           
           {/* Navigation Row - Separate line */}
@@ -372,9 +367,6 @@ export default function Home() {
               <a href="#programs" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Ngành đào tạo</a>
               <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Hợp tác quốc tế</a>
               <a href="#" className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Liên hệ</a>
-              <div className="pt-2">
-                <Button className="w-full">Đăng ký tư vấn</Button>
-              </div>
             </nav>
           </div>
         )}
