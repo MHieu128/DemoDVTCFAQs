@@ -829,7 +829,7 @@ export default function Home() {
 
         {/* Chat Window */}
         {isChatOpen && (
-          <div className="bg-background rounded-lg shadow-xl w-full sm:w-[26rem] h-[70dvh] sm:h-[35rem] max-h-[calc(100dvh-2rem)] flex flex-col border border-border overscroll-contain">
+          <div className="bg-background rounded-lg shadow-xl w-full sm:w-104 h-[70dvh] sm:h-140 max-h-[calc(100dvh-2rem)] flex flex-col border border-border overscroll-contain">
             {/* Chat Header */}
             <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex justify-between items-center">
               <div className="flex items-center">
