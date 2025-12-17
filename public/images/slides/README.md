@@ -4,7 +4,7 @@ Tải các ảnh sau và đặt vào thư mục này:
 
 1. **ts2025.jpg**
    - URL: https://dvtc.edu.vn/uploads/05-2025/ts2025.jpg
-   - Tuyển sinh 2025
+   - Tuyển sinh 2026
 
 2. **nganh-huong-dan-du-lich.png**
    - URL: https://dvtc.edu.vn/uploads/01-2025/nganh-huong-dan-du-lich.png

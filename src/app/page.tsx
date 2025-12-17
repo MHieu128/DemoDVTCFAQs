@@ -812,7 +812,7 @@ export default function Home() {
       </footer>
 
       {/* Chat Widget */}
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 left-4 right-4 z-50 flex justify-end sm:left-auto sm:right-4">
 
 
         {/* Chat Button */}
@@ -821,6 +821,7 @@ export default function Home() {
             onClick={() => setIsChatOpen(true)}
             size="icon"
             className="size-14 rounded-full shadow-lg"
+            aria-label="Mở chatbot"
           >
             <MessageSquare size={24} />
           </Button>
@@ -828,7 +829,7 @@ export default function Home() {
 
         {/* Chat Window */}
         {isChatOpen && (
-          <div className="bg-background rounded-lg shadow-xl w-104 sm:w-md h-140 flex flex-col border border-border">
+          <div className="bg-background rounded-lg shadow-xl w-full sm:w-[26rem] h-[70dvh] sm:h-[35rem] max-h-[calc(100dvh-2rem)] flex flex-col border border-border overscroll-contain">
             {/* Chat Header */}
             <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex justify-between items-center">
               <div className="flex items-center">
@@ -841,8 +842,9 @@ export default function Home() {
               <Button
                 onClick={() => setIsChatOpen(false)}
                 variant="ghost"
-                size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground p-1 h-auto"
+                size="icon"
+                className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                aria-label="Đóng chatbot"
               >
                 <X size={20} />
               </Button>
@@ -864,7 +866,7 @@ export default function Home() {
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[70%] p-3 rounded-lg ${
+                    className={`max-w-[85%] sm:max-w-[70%] p-3 rounded-lg ${
                       message.sender === 'user'
                         ? 'bg-primary text-primary-foreground rounded-br-none'
                         : 'bg-muted text-foreground rounded-bl-none'
@@ -946,7 +948,7 @@ export default function Home() {
             </div>
 
             {/* Chat Input */}
-            <div className="p-4 border-t border-border">
+            <div className="p-4 border-t border-border pb-[calc(env(safe-area-inset-bottom)+1rem)]">
               <div className="flex space-x-2">
                 <Input
                   value={currentMessage}
@@ -954,11 +956,14 @@ export default function Home() {
                   onKeyDown={handleKeyDown}
                   placeholder="Nhập tin nhắn..."
                   disabled={isLoading}
+                  className="h-11 sm:h-9"
                 />
                 <Button
                   onClick={sendMessage}
                   disabled={isLoading || !currentMessage.trim()}
                   size="icon"
+                  className="size-11 sm:size-9"
+                  aria-label="Gửi tin nhắn"
                 >
                   <Send size={16} />
                 </Button>
@@ -969,16 +974,16 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-xs h-6 px-2 py-0"
-                  onClick={() => setCurrentMessage('Tuyển sinh 2025')}
+                  className="text-xs h-8 px-3 py-0 sm:h-6 sm:px-2"
+                  onClick={() => setCurrentMessage('Tuyển sinh 2026')}
                   disabled={isLoading}
                 >
-                  Tuyển sinh 2025
+                  Tuyển sinh 2026
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-xs h-6 px-2 py-0"
+                  className="text-xs h-8 px-3 py-0 sm:h-6 sm:px-2"
                   onClick={() => setCurrentMessage('Các ngành đào tạo')}
                   disabled={isLoading}
                 >
@@ -987,7 +992,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="text-xs h-6 px-2 py-0"
+                  className="text-xs h-8 px-3 py-0 sm:h-6 sm:px-2"
                   onClick={() => setCurrentMessage('Học phí')}
                   disabled={isLoading}
                 >
