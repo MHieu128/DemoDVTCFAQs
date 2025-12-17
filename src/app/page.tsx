@@ -31,8 +31,8 @@ export default function Home() {
   // Slider data from original website
   const slides = [
     {
-      image: '/images/slides/ts2025.jpg',
-      title: 'Tuyển sinh 2025',
+      image: '/images/slides/ts2026.png',
+      title: 'Tuyển sinh 2026',
       link: 'https://dvtc.edu.vn/thong-bao-tuyen-sinh-nam-2025.html'
     },
     {
