@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: " Trường cao đẳng du lịch Đà Nẵng demo AI chatbot",
-  description: "Modern Next.js scaffold optimized for AI-powered development with . Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
+  description:
+    "Modern Next.js scaffold optimized for AI-powered development with . Built with TypeScript, Tailwind CSS, and shadcn/ui.",
+  keywords: [
+    "",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "AI development",
+    "React",
+  ],
   authors: [{ name: " Team" }],
   icons: {
     icon: "/favicon.png",
@@ -32,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <body
-        className="min-h-dvh antialiased bg-background text-foreground"
+        className={`${plusJakarta.variable} min-h-dvh antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster />
