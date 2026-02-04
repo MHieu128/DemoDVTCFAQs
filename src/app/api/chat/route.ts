@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const { message, sessionId } = body
 
     // Gửi message đến n8n webhook
-    const response = await fetch('https://n8n.cafencode.ddns.net/webhook/8419b4dc-924d-4c32-825c-a045b02206ec/chat', {
+    const response = await fetch('http://n8n.codeandcafe.com/webhook/8419b4dc-924d-4c32-825c-a045b02206ec/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
