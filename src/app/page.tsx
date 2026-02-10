@@ -538,29 +538,22 @@ export default function Home() {
       </header>
 
       {/* Hero Slider */}
-      <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden group bg-muted">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="absolute inset-0"
+      <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden group bg-black">
+        {/* Tất cả slides render cùng lúc, crossfade bằng CSS transition */}
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{
+              opacity: index === currentSlide ? 1 : 0,
+            }}
           >
-            <motion.img
-              src={slides[currentSlide].image}
-              alt={slides[currentSlide].title}
+            <img
+              src={slide.image}
+              alt={slide.title}
               className="w-full h-full object-cover"
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.1 }}
-              transition={{ duration: 8, ease: "linear" }}
               crossOrigin="anonymous"
               onError={(e) => {
-                console.error(
-                  "Image failed to load:",
-                  slides[currentSlide].image,
-                );
                 (e.target as HTMLImageElement).style.display = "none";
               }}
             />
@@ -568,8 +561,13 @@ export default function Home() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white px-4 max-w-4xl">
                 <motion.div
+                  key={`badge-${index}`}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={
+                    index === currentSlide
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
                   <span className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium">
@@ -578,16 +576,26 @@ export default function Home() {
                   </span>
                 </motion.div>
                 <motion.h2
+                  key={`title-${index}`}
                   className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-lg leading-tight"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={
+                    index === currentSlide
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  {slides[currentSlide].title}
+                  {slide.title}
                 </motion.h2>
                 <motion.div
+                  key={`cta-${index}`}
                   initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={
+                    index === currentSlide
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
                   <Button
@@ -600,8 +608,8 @@ export default function Home() {
                 </motion.div>
               </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        ))}
 
         {/* Navigation arrows */}
         <motion.button
