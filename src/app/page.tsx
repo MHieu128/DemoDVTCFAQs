@@ -52,6 +52,190 @@ interface ChatMessage {
   timestamp: string;
 }
 
+// ===== Dữ liệu tĩnh khai báo NGOÀI component để tránh tạo lại mỗi render =====
+
+const slides = [
+  {
+    image: "/images/slides/ts2026.png",
+    title: "Tuyển sinh 2026",
+    link: "https://dvtc.edu.vn/thong-bao-tuyen-sinh-nam-2025.html",
+  },
+  {
+    image: "/images/slides/nganh-huong-dan-du-lich.png",
+    title: "Ngành Hướng dẫn du lịch",
+    link: "#",
+  },
+  {
+    image: "/images/slides/nganh-ky-thuat-che-bien-mon-an.png",
+    title: "Ngành Kỹ thuật chế biến món ăn",
+    link: "#",
+  },
+  {
+    image: "/images/slides/nganh-phien-dich-tieng-anh-du-lich.png",
+    title: "Ngành Phiên dịch tiếng Anh du lịch",
+    link: "#",
+  },
+  {
+    image: "/images/slides/nganh-quan-tri-du-lich-mice-to-chuc-su-kien.png",
+    title: "Ngành Quản trị Du lịch MICE",
+    link: "#",
+  },
+  {
+    image: "/images/slides/nganh-quan-tri-khach-san.png",
+    title: "Ngành Quản trị khách sạn",
+    link: "#",
+  },
+];
+
+const testimonials = [
+  {
+    content:
+      "Thư viện nhiều đầu sách và đa dạng về sách tham khảo, có chỗ cho sinh viên nghỉ trưa sau những giờ học căng thẳng.",
+    author: "Nguyễn Thị Thu Thảo",
+    class: "Lớp 8CKS7",
+    department: "Khoa Quản trị khách sạn, nhà hàng",
+    avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar-thao.png",
+  },
+  {
+    content:
+      "Phòng thực hành của Trường rất hiện đại với đầy đủ trang thiết bị giống như tại các khách sạn 5 sao mà em đã từng đi thực tập.",
+    author: "Lê Thị Thúy Ngân",
+    class: "Lớp 8CKS7",
+    department: "Khoa Quản trị khách sạn, nhà hàng",
+    avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar_ngan.png",
+  },
+  {
+    content:
+      "Khuôn viên Trường mình đẹp và sạch sẽ nhất so với những Trường khác mà mình đã ghé qua. Thật tuyệt khi đi bộ hay ngồi đọc sách dưới tán cây xanh trong sân Trường.",
+    author: "Phạm Thị Thục Quỳnh",
+    class: "Lớp 8CKS7",
+    department: "Khoa Quản trị khách sạn, nhà hàng",
+    avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar_quynh.png",
+  },
+];
+
+const trainingPrograms = [
+  {
+    name: "Truyền thông đa phương tiện",
+    icon: <Camera className="w-8 h-8" />,
+    image:
+      "https://dvtc.edu.vn/uploads/01-2025/truyen-thong-da-phuong-tien.png",
+    link: "http://dvtc.edu.vn/truyen-thong-da-phuong-tien.html",
+  },
+  {
+    name: "Hướng dẫn du lịch",
+    icon: <Users2 className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/huong-dan-du-lich.png",
+    link: "http://dvtc.edu.vn/huong-dan-du-lich.html",
+  },
+  {
+    name: "Quản trị lữ hành",
+    icon: <Plane className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-lu-hanh.png",
+    link: "http://dvtc.edu.vn/quan-tri-lu-hanh.html",
+  },
+  {
+    name: "Phiên dịch tiếng Anh du lịch",
+    icon: <Languages className="w-8 h-8" />,
+    image:
+      "https://dvtc.edu.vn/uploads/01-2025/phien-dich-tieng-anh-du-lich.png",
+    link: "http://dvtc.edu.vn/phien-dich-tieng-anh-du-lich.html",
+  },
+  {
+    name: "Quản trị khu resort",
+    icon: <Hotel className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khu-resort.png",
+    link: "http://dvtc.edu.vn/quan-tri-khu-resort.html",
+  },
+  {
+    name: "Quản trị nhà hàng",
+    icon: <Utensils className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-nha-hang.png",
+    link: "http://dvtc.edu.vn/quan-tri-nha-hang.html",
+  },
+  {
+    name: "Quản trị Du lịch MICE",
+    icon: <MessageSquare className="w-8 h-8" />,
+    image:
+      "https://dvtc.edu.vn/uploads/01-2025/quan-tri-du-lich-mic-to-chuc-su-kien.png",
+    link: "http://dvtc.edu.vn/quan-tri-du-lich-mice-to-chuc-su-kien.html",
+  },
+  {
+    name: "Quản trị khách sạn",
+    icon: <Building2 className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khach-san.png",
+    link: "http://dvtc.edu.vn/nganh-nghe-dao-tao/quan-tri-khach-san/",
+  },
+  {
+    name: "Kỹ thuật chế biến món ăn",
+    icon: <Utensils className="w-8 h-8" />,
+    image: "https://dvtc.edu.vn/uploads/01-2025/ky-thuat-che-bien-mon-an.png",
+    link: "http://dvtc.edu.vn/nganh-nghe-dao-tao/ky-thuat-che-bien-mon-an/",
+  },
+];
+
+const newsData = {
+  events: [
+    {
+      title:
+        "🌟 CHƯƠNG TRÌNH GIAO LƯU ẨM THỰC VỚI HIỆP HỘI XUẤT KHẨU TRỨNG & GIA CẦM HOA KỲ – LẦN THỨ 4.",
+      image: "https://dvtc.edu.vn/uploads/12-2025/am-thuc.jpg",
+      link: "http://dvtc.edu.vn/-chuong-trinh-giao-luu-am-thuc-voi-hiep-hoi-xuat-khau-trung-gia-cam-hoa-ky-lan-thu-4..html",
+    },
+    {
+      title:
+        "CHÚC MỪNG ĐẠI HỘI CÔNG ĐOÀN TRƯỜNG CĐ DU LỊCH ĐÀ NẴNG THÀNH CÔNG TỐT ĐẸP 💐💐",
+      link: "http://dvtc.edu.vn/chuc-mung-dai-hoi-cong-doan-truong-cd-du-lich-da-nang-thanh-cong-tot-dep-.html",
+    },
+    {
+      title: "🎉 KỶ NIỆM 43 NĂM NGÀY NHÀ GIÁO VIỆT NAM 20/11",
+      link: "http://dvtc.edu.vn/-ky-niem-43-nam-ngay-nha-giao-viet-nam-2011.html",
+    },
+  ],
+  partnerships: [
+    {
+      title:
+        "🎉LỄ KÝ KẾT HỢP TÁC GIỮA TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG VÀ FUSION RESORT & VILLAS DA NANG",
+      image: "https://dvtc.edu.vn/uploads/02-2025/6-1848.jpg",
+      link: "http://dvtc.edu.vn/le-ky-ket-hop-tac-giua-truong-cao-dang-du-lich-da-nang-va-fusion-resort-villas-da-nang.html",
+    },
+    {
+      title:
+        "TRƯỜNG CAO ĐẲNG DU LỊCHĐÀ NẴNG KÝ KẾT BIÊN BẢN GHI NHỚ HỢP TÁC CHIẾN LƯỢC VỚI THE FIVE – THƯƠNG HIỆU NGHĨ DƯỠNG ...",
+      link: "http://dvtc.edu.vn/truong-cao-dang-du-lich-da-nang-ky-ket-bien-ban-ghi-nho-hop-tac-chien-luoc-voi-the-five-thuong-hieu-nghi-duong-cao-cap-cua-tap-doan-thanh-cong.html",
+    },
+  ],
+  announcements: [
+    {
+      title:
+        "THÔNG BÁO LỊCH THI KTM KHÓA 13, HKI 2025-2026 (15/12/2025-02/01/2026)",
+      image: "https://dvtc.edu.vn/public/images/thongbao.jpg",
+      link: "http://dvtc.edu.vn/thong-bao-lich-thi-ktm-khoa-13-hki-2025-2026-15122025-02012026.html",
+    },
+    {
+      title:
+        "Thời khóa biểu tuần 16 từ ngày 15/12 đến ngày 21/12/2025 - Cao đẳng khóa 13,14,15; Trung cấp khóa 8,9",
+      link: "http://dvtc.edu.vn/thoi-khoa-bieu-tuan-16-tu-ngay-1512-den-ngay-21122025-cao-dang-khoa-131415-trung-cap-khoa-89.html",
+    },
+  ],
+};
+
+const partners = [
+  "https://dvtc.edu.vn/uploads/09-2020/logo1-1048.jpg",
+  "https://dvtc.edu.vn/uploads/09-2020/logo21.jpg",
+  "https://dvtc.edu.vn/uploads/09-2020/logo31.jpg",
+  "https://dvtc.edu.vn/uploads/09-2020/logo41.jpg",
+  "https://dvtc.edu.vn/uploads/05-2020/logo1.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/furama.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/fusionmaia.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/petrolimex.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/sunworld.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/vietnamtourism-vitours.jpg",
+  "https://dvtc.edu.vn/uploads/10-2019/vinpearl.jpg",
+];
+
+// ===== Component chính =====
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -66,205 +250,20 @@ export default function Home() {
     setSessionId("user_session_" + Date.now());
   }, []);
 
-  // Slider data from original website
-  const slides = [
-    {
-      image: "/images/slides/ts2026.png",
-      title: "Tuyển sinh 2026",
-      link: "https://dvtc.edu.vn/thong-bao-tuyen-sinh-nam-2025.html",
-    },
-    {
-      image: "/images/slides/nganh-huong-dan-du-lich.png",
-      title: "Ngành Hướng dẫn du lịch",
-      link: "#",
-    },
-    {
-      image: "/images/slides/nganh-ky-thuat-che-bien-mon-an.png",
-      title: "Ngành Kỹ thuật chế biến món ăn",
-      link: "#",
-    },
-    {
-      image: "/images/slides/nganh-phien-dich-tieng-anh-du-lich.png",
-      title: "Ngành Phiên dịch tiếng Anh du lịch",
-      link: "#",
-    },
-    {
-      image: "/images/slides/nganh-quan-tri-du-lich-mice-to-chuc-su-kien.png",
-      title: "Ngành Quản trị Du lịch MICE",
-      link: "#",
-    },
-    {
-      image: "/images/slides/nganh-quan-tri-khach-san.png",
-      title: "Ngành Quản trị khách sạn",
-      link: "#",
-    },
-  ];
-
-  // Testimonials from original website
-  const testimonials = [
-    {
-      content:
-        "Thư viện nhiều đầu sách và đa dạng về sách tham khảo, có chỗ cho sinh viên nghỉ trưa sau những giờ học căng thẳng.",
-      author: "Nguyễn Thị Thu Thảo",
-      class: "Lớp 8CKS7",
-      department: "Khoa Quản trị khách sạn, nhà hàng",
-      avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar-thao.png",
-    },
-    {
-      content:
-        "Phòng thực hành của Trường rất hiện đại với đầy đủ trang thiết bị giống như tại các khách sạn 5 sao mà em đã từng đi thực tập.",
-      author: "Lê Thị Thúy Ngân",
-      class: "Lớp 8CKS7",
-      department: "Khoa Quản trị khách sạn, nhà hàng",
-      avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar_ngan.png",
-    },
-    {
-      content:
-        "Khuôn viên Trường mình đẹp và sạch sẽ nhất so với những Trường khác mà mình đã ghé qua. Thật tuyệt khi đi bộ hay ngồi đọc sách dưới tán cây xanh trong sân Trường.",
-      author: "Phạm Thị Thục Quỳnh",
-      class: "Lớp 8CKS7",
-      department: "Khoa Quản trị khách sạn, nhà hàng",
-      avatar: "https://dvtc.edu.vn/uploads/09-2019/anh-avatar_quynh.png",
-    },
-  ];
-
-  // Training programs from original website
-  const trainingPrograms = [
-    {
-      name: "Truyền thông đa phương tiện",
-      icon: <Camera className="w-8 h-8" />,
-      image:
-        "https://dvtc.edu.vn/uploads/01-2025/truyen-thong-da-phuong-tien.png",
-      link: "http://dvtc.edu.vn/truyen-thong-da-phuong-tien.html",
-    },
-    {
-      name: "Hướng dẫn du lịch",
-      icon: <Users2 className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/huong-dan-du-lich.png",
-      link: "http://dvtc.edu.vn/huong-dan-du-lich.html",
-    },
-    {
-      name: "Quản trị lữ hành",
-      icon: <Plane className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-lu-hanh.png",
-      link: "http://dvtc.edu.vn/quan-tri-lu-hanh.html",
-    },
-    {
-      name: "Phiên dịch tiếng Anh du lịch",
-      icon: <Languages className="w-8 h-8" />,
-      image:
-        "https://dvtc.edu.vn/uploads/01-2025/phien-dich-tieng-anh-du-lich.png",
-      link: "http://dvtc.edu.vn/phien-dich-tieng-anh-du-lich.html",
-    },
-    {
-      name: "Quản trị khu resort",
-      icon: <Hotel className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khu-resort.png",
-      link: "http://dvtc.edu.vn/quan-tri-khu-resort.html",
-    },
-    {
-      name: "Quản trị nhà hàng",
-      icon: <Utensils className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-nha-hang.png",
-      link: "http://dvtc.edu.vn/quan-tri-nha-hang.html",
-    },
-    {
-      name: "Quản trị Du lịch MICE",
-      icon: <MessageSquare className="w-8 h-8" />,
-      image:
-        "https://dvtc.edu.vn/uploads/01-2025/quan-tri-du-lich-mic-to-chuc-su-kien.png",
-      link: "http://dvtc.edu.vn/quan-tri-du-lich-mice-to-chuc-su-kien.html",
-    },
-    {
-      name: "Quản trị khách sạn",
-      icon: <Building2 className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khach-san.png",
-      link: "http://dvtc.edu.vn/nganh-nghe-dao-tao/quan-tri-khach-san/",
-    },
-    {
-      name: "Kỹ thuật chế biến món ăn",
-      icon: <Utensils className="w-8 h-8" />,
-      image: "https://dvtc.edu.vn/uploads/01-2025/ky-thuat-che-bien-mon-an.png",
-      link: "http://dvtc.edu.vn/nganh-nghe-dao-tao/ky-thuat-che-bien-mon-an/",
-    },
-  ];
-
-  // News data from original website
-  const newsData = {
-    events: [
-      {
-        title:
-          "🌟 CHƯƠNG TRÌNH GIAO LƯU ẨM THỰC VỚI HIỆP HỘI XUẤT KHẨU TRỨNG & GIA CẦM HOA KỲ – LẦN THỨ 4.",
-        image: "https://dvtc.edu.vn/uploads/12-2025/am-thuc.jpg",
-        link: "http://dvtc.edu.vn/-chuong-trinh-giao-luu-am-thuc-voi-hiep-hoi-xuat-khau-trung-gia-cam-hoa-ky-lan-thu-4..html",
-      },
-      {
-        title:
-          "CHÚC MỪNG ĐẠI HỘI CÔNG ĐOÀN TRƯỜNG CĐ DU LỊCH ĐÀ NẴNG THÀNH CÔNG TỐT ĐẸP 💐💐",
-        link: "http://dvtc.edu.vn/chuc-mung-dai-hoi-cong-doan-truong-cd-du-lich-da-nang-thanh-cong-tot-dep-.html",
-      },
-      {
-        title: "🎉 KỶ NIỆM 43 NĂM NGÀY NHÀ GIÁO VIỆT NAM 20/11",
-        link: "http://dvtc.edu.vn/-ky-niem-43-nam-ngay-nha-giao-viet-nam-2011.html",
-      },
-    ],
-    partnerships: [
-      {
-        title:
-          "🎉LỄ KÝ KẾT HỢP TÁC GIỮA TRƯỜNG CAO ĐẲNG DU LỊCH ĐÀ NẴNG VÀ FUSION RESORT & VILLAS DA NANG",
-        image: "https://dvtc.edu.vn/uploads/02-2025/6-1848.jpg",
-        link: "http://dvtc.edu.vn/le-ky-ket-hop-tac-giua-truong-cao-dang-du-lich-da-nang-va-fusion-resort-villas-da-nang.html",
-      },
-      {
-        title:
-          "TRƯỜNG CAO ĐẲNG DU LỊCHĐÀ NẴNG KÝ KẾT BIÊN BẢN GHI NHỚ HỢP TÁC CHIẾN LƯỢC VỚI THE FIVE – THƯƠNG HIỆU NGHĨ DƯỠNG ...",
-        link: "http://dvtc.edu.vn/truong-cao-dang-du-lich-da-nang-ky-ket-bien-ban-ghi-nho-hop-tac-chien-luoc-voi-the-five-thuong-hieu-nghi-duong-cao-cap-cua-tap-doan-thanh-cong.html",
-      },
-    ],
-    announcements: [
-      {
-        title:
-          "THÔNG BÁO LỊCH THI KTM KHÓA 13, HKI 2025-2026 (15/12/2025-02/01/2026)",
-        image: "https://dvtc.edu.vn/public/images/thongbao.jpg",
-        link: "http://dvtc.edu.vn/thong-bao-lich-thi-ktm-khoa-13-hki-2025-2026-15122025-02012026.html",
-      },
-      {
-        title:
-          "Thời khóa biểu tuần 16 từ ngày 15/12 đến ngày 21/12/2025 - Cao đẳng khóa 13,14,15; Trung cấp khóa 8,9",
-        link: "http://dvtc.edu.vn/thoi-khoa-bieu-tuan-16-tu-ngay-1512-den-ngay-21122025-cao-dang-khoa-131415-trung-cap-khoa-89.html",
-      },
-    ],
-  };
-
-  // Partners from original website
-  const partners = [
-    "https://dvtc.edu.vn/uploads/09-2020/logo1-1048.jpg",
-    "https://dvtc.edu.vn/uploads/09-2020/logo21.jpg",
-    "https://dvtc.edu.vn/uploads/09-2020/logo31.jpg",
-    "https://dvtc.edu.vn/uploads/09-2020/logo41.jpg",
-    "https://dvtc.edu.vn/uploads/05-2020/logo1.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/furama.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/fusionmaia.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/petrolimex.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/sunworld.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/vietnamtourism-vitours.jpg",
-    "https://dvtc.edu.vn/uploads/10-2019/vinpearl.jpg",
-  ];
-
-  // Auto-advance slides
+  // Auto-advance slides - empty deps vì slides/testimonials là constant ngoài component
   useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(slideInterval);
-  }, [slides.length]);
+  }, []);
 
   useEffect(() => {
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 4000);
     return () => clearInterval(testimonialInterval);
-  }, [testimonials.length]);
+  }, []);
 
   // Chat function
   const sendMessage = async () => {
