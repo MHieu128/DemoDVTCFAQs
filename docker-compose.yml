@@ -7,15 +7,6 @@ services:
     container_name: dvtc-faqs-app
     environment:
       - NODE_ENV=production
-      - NODE_OPTIONS=--max-old-space-size=384
-    deploy:
-      resources:
-        limits:
-          cpus: "1.0"
-          memory: 512M
-        reservations:
-          cpus: "0.25"
-          memory: 128M
     healthcheck:
       test:
         [
