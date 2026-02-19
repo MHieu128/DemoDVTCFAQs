@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     container_name: demo-dvtc-faqs-web
     restart: unless-stopped
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
     healthcheck:
