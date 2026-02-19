@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   web:
@@ -7,27 +7,11 @@ services:
       dockerfile: Dockerfile
     container_name: demo-dvtc-faqs-web
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
       - NODE_ENV=production
-    networks:
-      - coolify
-
-  # Optional: If you want to bundle cloudflare tunnel directly via compose.
-  # Assuming you provide a TUNNEL_TOKEN via environment variables in Coolify.
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: demo-dvtc-faqs-tunnel
-    restart: unless-stopped
-    command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-    networks:
-      - coolify
-    depends_on:
-      - web
-
-networks:
-  coolify:
-    external: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
