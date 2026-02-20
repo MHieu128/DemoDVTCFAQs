@@ -4,55 +4,55 @@ export default function Home() {
   const branches = [
     {
       name: "Truyền thông đa phương tiện",
-      img: "https://dvtc.edu.vn/uploads/01-2025/truyen-thong-da-phuong-tien.png",
+      img: "/images/branch_multimedia.jpg",
     },
     {
       name: "Hướng dẫn du lịch",
-      img: "https://dvtc.edu.vn/uploads/01-2025/huong-dan-du-lich.png",
+      img: "/images/branch_tour.jpg",
     },
     {
       name: "Quản trị lữ hành",
-      img: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-lu-hanh.png",
+      img: "/images/branch_travel_mgmt.jpg",
     },
     {
       name: "Phiên dịch tiếng anh du lịch",
-      img: "https://dvtc.edu.vn/uploads/01-2025/phien-dich-tieng-anh-du-lich.png",
+      img: "/images/branch_english.jpg",
     },
     {
       name: "Quản trị khu resort",
-      img: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khu-resort.png",
+      img: "/images/branch_resort.jpg",
     },
     {
       name: "Quản trị nhà hàng",
-      img: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-nha-hang.png",
+      img: "/images/branch_restaurant.jpg",
     },
     {
       name: "Quản trị Du lịch MICE (Tổ chức sự kiện)",
-      img: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-du-lich-mice-to-chuc-su-kien.png",
+      img: "/images/branch_events.jpg",
     },
     {
       name: "Đánh giá Kỹ năng nghề Quốc gia",
-      img: "https://dvtc.edu.vn/uploads/03-2023/dvtc2377.jpg",
+      img: "/images/branch_assessment.jpg",
       count: 9,
     },
     {
       name: "Quản trị khách sạn",
-      img: "https://dvtc.edu.vn/uploads/01-2025/quan-tri-khach-san.png",
+      img: "/images/branch_hotel.jpg",
       count: 3,
     },
     {
       name: "Kỹ thuật chế biến món ăn",
-      img: "https://dvtc.edu.vn/uploads/01-2025/ky-thuat-che-bien-mon-an.png",
+      img: "/images/branch_cooking.jpg",
       count: 3,
     },
     {
       name: "Sơ cấp - Bồi dưỡng ngắn hạn",
-      img: "https://dvtc.edu.vn/uploads/09-2019/img_471312.jpg",
+      img: "/images/branch_short_courses.jpg",
       count: 17,
     },
     {
       name: "Chương trình liên kết quốc tế",
-      img: "https://dvtc.edu.vn/uploads/09-2019/quoctethaibinhduong3.jpg",
+      img: "/images/branch_international.jpg",
     },
   ];
 
@@ -64,8 +64,7 @@ export default function Home() {
         <div
           className="w-full h-[300px] md:h-[500px] bg-cover bg-center bg-no-repeat flex items-center justify-center text-white"
           style={{
-            backgroundImage:
-              "url('https://dvtc.edu.vn/uploads/05-2025/ts2025.jpg')",
+            backgroundImage: "url('/images/hero.jpg')",
           }}
         ></div>
       </section>
@@ -84,7 +83,7 @@ export default function Home() {
                   className="w-full h-[315px] object-cover"
                 >
                   <source
-                    src="https://dvtc.edu.vn/public/video/Van_hoa_ung_xu.mp4"
+                    src="https://www.w3schools.com/html/mov_bbb.mp4"
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.
@@ -100,7 +99,7 @@ export default function Home() {
                 </p>
                 <div className="flex items-center gap-4">
                   <img
-                    src="https://dvtc.edu.vn/uploads/09-2019/anh-avatar-thao.png"
+                    src="/images/avatar.jpg"
                     alt="Thao"
                     className="w-16 h-16 rounded-full border-2 border-primary object-cover"
                   />
@@ -170,7 +169,7 @@ export default function Home() {
               <div className="mb-4 group cursor-pointer block">
                 <div className="aspect-[4/3] overflow-hidden rounded mb-3">
                   <img
-                    src="https://dvtc.edu.vn/uploads/02-2026/6-1951.jpg"
+                    src="/images/news_1.jpg"
                     alt="News"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
@@ -215,7 +214,7 @@ export default function Home() {
               <div className="mb-4 group cursor-pointer block">
                 <div className="aspect-[4/3] overflow-hidden rounded mb-3">
                   <img
-                    src="https://dvtc.edu.vn/uploads/02-2025/6-1848.jpg"
+                    src="/images/news_2.jpg"
                     alt="News"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
@@ -260,9 +259,9 @@ export default function Home() {
               <div className="mb-4 group cursor-pointer block">
                 <div className="aspect-[4/3] overflow-hidden rounded mb-3 border border-gray-100">
                   <img
-                    src="https://dvtc.edu.vn/uploads/10-2020/thong-bao-dvtc-edu-782-1094.jpg"
+                    src="/images/news_3.jpg"
                     alt="News"
-                    className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
                 <h3 className="font-bold text-[#333] group-hover:text-primary transition-colors text-sm line-clamp-2">
@@ -305,36 +304,24 @@ export default function Home() {
             Đối tác
           </h2>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-80">
-            <img
-              src="https://dvtc.edu.vn/uploads/10-2019/furama.jpg"
-              alt="Furama"
-              className="h-10 object-contain hover:opacity-100 transition-opacity"
-            />
-            <img
-              src="https://dvtc.edu.vn/uploads/10-2019/sunworld.jpg"
-              alt="Sunworld"
-              className="h-10 object-contain hover:opacity-100 transition-opacity"
-            />
-            <img
-              src="https://dvtc.edu.vn/uploads/10-2019/vinpearl.jpg"
-              alt="Vinpearl"
-              className="h-10 object-contain hover:opacity-100 transition-opacity"
-            />
-            <img
-              src="https://dvtc.edu.vn/uploads/11-2023/nh-mb.jpg"
-              alt="MB"
-              className="h-8 object-contain hover:opacity-100 transition-opacity"
-            />
-            <img
-              src="https://dvtc.edu.vn/uploads/11-2023/silk-sense.jpg"
-              alt="Silk Sense"
-              className="h-10 object-contain hover:opacity-100 transition-opacity"
-            />
-            <img
-              src="https://dvtc.edu.vn/uploads/10-2019/vietnamtourism-vitours.jpg"
-              alt="Vitours"
-              className="h-10 object-contain hover:opacity-100 transition-opacity"
-            />
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              Furama
+            </div>
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              Sunworld
+            </div>
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              Vinpearl
+            </div>
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              MB Bank
+            </div>
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              Silk Sense
+            </div>
+            <div className="h-10 px-6 bg-gray-50 border border-gray-200 flex items-center justify-center font-bold text-gray-500 rounded uppercase text-sm tracking-wider">
+              Vitours
+            </div>
           </div>
         </div>
       </section>

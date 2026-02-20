@@ -114,7 +114,7 @@ export default function RootLayout({
                 <h1 className="m-0">
                   <a href="/">
                     <img
-                      src="https://dvtc.edu.vn/uploads/07-2024/logo-1760.png"
+                      src="/logo-1760.png"
                       alt="logo"
                       className="h-16 md:h-20"
                     />
